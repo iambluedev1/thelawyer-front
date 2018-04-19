@@ -5,7 +5,7 @@
 
 ## The Lawyer
 
-The Lawyer is a project initialy for the project [VulkanNetwork](https://twitter.com/VulkanNetwork), this allows moderators, administrators and more generally people to find the sanctions of a player on several servers.
+The Lawyer is a project initialy for the minecraft project [VulkanNetwork](https://twitter.com/VulkanNetwork), this allows moderators, administrators and more generally people to find the sanctions of a player on several minecraft servers.
 This repository refers to the front part of the project.
 
 ## Features
