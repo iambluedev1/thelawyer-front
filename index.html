@@ -1,0 +1,235 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+		<title>The Lawyer</title>
+		<meta charset="utf-8" />
+		<meta name="Content-Language" content="fr">
+		<meta name="Description" content="Outil permettant de rechercher les antécédents d'un joueur sur différents serveurs">
+		<meta name="Author" content="iambluedev">
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/font-awesome.min.css" rel="stylesheet">
+		<link href="css/app.css" rel="stylesheet">
+	</head>
+	<body>
+		<section>
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6">
+						<h3>The Lawyer</h3>
+					</div>
+					<div class="col-md-3 col-md-offset-3">
+						<div style="margin-top: 12px; float: right;">
+							<button href="#" class="btn btn-info refresh">Actualiser</button>
+						</div>
+					</div>
+				</div>
+				<div class="alert alert-danger alert-dismissible" style="display:none;" id="error">
+					<a href="#" class="close" onclick="$(this).parent().hide();">&times;</a>
+					<strong>Erreur : </strong> Un problème est survenu lors de la communication avec l'api
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-3">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-xs-6">
+												<i class="fa fa-ban fa-5x"></i>
+											</div>
+											<div class="col-xs-6 text-right">
+												<p class="announcement-heading">Bans</p>
+												<p class="announcement-text"><strong id="bansCount"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></strong></p>
+											</div>
+										</div>
+									</div>
+									<a href="#" class="show-details" type="bans" style="display: none;">
+										<div class="panel-footer announcement-bottom">
+											<div class="row">
+												<div class="col-xs-6">
+													Détails
+												</div>
+												<div class="col-xs-6 text-right">
+													<i class="fa fa-arrow-circle-down"></i>
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>
+							<div class="col-md-3">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-xs-6">
+												<i class="fa fa-microphone-slash fa-5x"></i>
+											</div>
+											<div class="col-xs-6 text-right">
+												<p class="announcement-heading"> Mutes</p>
+												<p class="announcement-text"><strong id="mutesCount"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></strong></p>
+											</div>
+										</div>
+									</div>
+									<a href="#" class="show-details" type="mutes" style="display: none;">
+										<div class="panel-footer announcement-bottom">
+											<div class="row">
+												<div class="col-xs-6">
+													Détails
+												</div>
+												<div class="col-xs-6 text-right">
+													<i class="fa fa-arrow-circle-down"></i>
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>	
+							<div class="col-md-3">
+								<div class="panel panel-warning">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-xs-6">
+												<i class="fa fa-sign-out fa-5x"></i>
+											</div>
+											<div class="col-xs-6 text-right">
+												<p class="announcement-heading"> Kicks</p>
+												<p class="announcement-text"><strong id="kicksCount"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></strong></p>
+											</div>
+										</div>
+									</div>
+									<a href="#" class="show-details" type="kicks" style="display: none;">
+										<div class="panel-footer announcement-bottom">
+											<div class="row">
+												<div class="col-xs-6">
+													Détails
+												</div>
+												<div class="col-xs-6 text-right">
+													<i class="fa fa-arrow-circle-down"></i>
+												</div>
+											</div>
+										</div>
+									</a>									
+								</div>
+							</div>		
+							<div class="col-md-3">
+								<div class="panel panel-success">
+									<div class="panel-heading">
+										<div class="row">
+											<div class="col-xs-6">
+												<i class="fa fa-exclamation-circle fa-5x"></i>
+											</div>
+											<div class="col-xs-6 text-right">
+												<p class="announcement-heading"> Warnings</p>
+												<p class="announcement-text"><strong id="warningsCount"><i class="fa fa-spinner fa-spin fa-2x fa-fw"></i></strong></p>
+											</div>
+										</div>
+									</div>
+									<a href="#" class="show-details" type="warnings" style="display: none;">
+										<div class="panel-footer announcement-bottom">
+											<div class="row">
+												<div class="col-xs-6">
+													Détails
+												</div>
+												<div class="col-xs-6 text-right">
+													<i class="fa fa-arrow-circle-down"></i>
+												</div>
+											</div>
+										</div>
+									</a>
+								</div>
+							</div>			
+						</div>
+						<div id="details" class="alert alert-info alert-dismissible" style="display: none;">
+							<a href="#" class="close" onclick="$(this).parent().hide(); $('#detailsContent').html('')">&times;</a>
+							<strong>Détails pour les <span id="detailName"></span> :</strong> <hr> <div id="detailsContent"></div>
+						</div>
+					</div>
+					<div class="col-md-12" style="padding-bottom: 20px;">
+						<div class="input-group">
+							<input type="text" class="form-control" name="player" id="player" placeholder="Rechercher un joueur" />
+							<div class="input-group-btn">
+								<div class="btn-group" role="group">
+									<div class="dropdown dropdown-lg">
+										<button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="dropdown"><span class="caret"></span></button>
+										<div class="dropdown-menu dropdown-menu-right" role="menu">
+											<form class="form-horizontal" role="form">
+												<div class="form-group">
+													<label for="filter">Sanctions</label>
+													<select class="form-control" name="type" id="type">
+														<option value="0" selected>Toutes les sanctions</option>
+														<option value="1">Bans</option>
+														<option value="2">Mutes</option>
+														<option value="3">Warnings</option>
+														<option value="4">Kicks</option>
+													</select>
+												</div>
+												<div class="form-group">
+													<label for="filter">Serveurs</label>
+													<select class="form-control" name="servers" id="servers">
+														<option value="0" selected>Tous les serveurs</option>
+													</select>
+												</div>
+												<div class="form-check">
+													<input type="checkbox" class="form-check-input" id="sqlLike" checked>
+													<label class="form-check-label" for="sqlLike">Rechercher des pseudos proches</label>
+												</div>
+											</form>
+										</div>
+									</div>
+									<button class="btn btn-primary search-btn"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="search" style="display: none;">
+					<div class="alert alert-info">
+						<strong>Rercherche en cours avec comme paramètres : </strong> <hr> <div id="searchParams"></div>
+					</div>
+					<div class="panel panel-default">
+						<div class="panel-heading">Résultat</div>
+						<div class="panel-body">
+							<i class="fa fa-spinner fa-spin fa-8x fa-fw" id="loading"></i>
+							<table class="table table-hover" style="display: none;" id="table-results"> 
+								<thead>
+									<tr> 
+										<th>#</th> 
+										<th>Type</th> 
+										<th>Joueur</th> 
+										<th>Par</th>
+										<th>Raison</th> 
+										<th>le</th> 
+										<th>Serveur</th> 
+									</tr>
+								</thead> 
+								<tbody id="tbody">
+									
+								</tbody>
+							</table>
+						</div>
+						<div class="panel-footer dropup">
+							<div class="dropdown pull-left">
+								<button class="btn btn-primary dropdown-toggle btn-sm btn-export" type="button" data-toggle="dropdown">Exporter les résultats
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" class="export-results-json">JSON</a></li>
+								</ul>
+							</div> 
+							<div class="dropdown pull-right">
+								<button class="btn btn-primary dropdown-toggle btn-sm btn-export" type="button" data-toggle="dropdown">Exporter la liste des serveurs
+								<span class="caret"></span></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" class="export-hotlinks-json">JSON</a></li>
+								</ul>
+							</div> 
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script src="js/jquery-3.3.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/app.js"></script>
+	</body>
+</html>
