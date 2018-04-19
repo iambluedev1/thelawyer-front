@@ -5,14 +5,14 @@
 
 ## The Lawyer
 
-The Lawyer is a project initialy for the project [VulkanNetwork](https://twitter.com/VulkanNetwork), it allows to moderator, administrator and more generally people to find sanctions of a player over multiple servers.
+The Lawyer is a project initialy for the project [VulkanNetwork](https://twitter.com/VulkanNetwork), this allows moderators, administrators and more generally people to find the sanctions of a player on several servers.
 This repository refers to the front part of the project.
 
 ## Features
 
 - auto-completion of the username
 - filter by selecting a specific server or sanction
-- also get sanctions of players who have a similar pseudo
+- also get sanctions of players who have a similar username
 - send a refresh action
 - export results and hotlinks to a json file
 
@@ -72,7 +72,7 @@ Used banlists :
 | [BloodSymphony](https://bloodsymphony.com) | https://bloodsymphony.com/banlist | litebans |
 | [EnergyFight](https://energygaming.fr) | https://energygaming.fr/banlist/energyfight | litebans |
 | [EnergyCheat](https://energygaming.fr) | https://energygaming.fr/banlist/energycheat | litebans |
-| [EnergyPlay](https://energygaming.fr) | https://energygaming.fr/banlist/energyplay | jlitebansson |
+| [EnergyPlay](https://energygaming.fr) | https://energygaming.fr/banlist/energyplay | litebans |
 | [EnergyWild](https://energygaming.fr) | https://energygaming.fr/banlist/energywild | litebans |
 | [SurvivalWorld](https://survivalworld.fr/) | https://ban.survivalworld.fr | fork_litebans |
 
