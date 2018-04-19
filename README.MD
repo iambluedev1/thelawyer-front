@@ -8,6 +8,10 @@
 The Lawyer is a project initialy for the project [VulkanNetwork](https://twitter.com/VulkanNetwork), this allows moderators, administrators and more generally people to find the sanctions of a player on several servers.
 This repository refers to the front part of the project.
 
+### Demo
+
+You can view a demo at http://fs-api.cf/
+
 ## Features
 
 - auto-completion of the username
