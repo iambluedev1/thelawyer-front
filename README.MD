@@ -68,7 +68,7 @@ Used banlists :
 | Name | Banlist | Type |
 |---|---|---|
 | [Kryptonia](https://kryptonia.fr) | https://kryptonia.fr/core/cache/sanctions_ban.json | json |
-| [Senacraft](https://senacraft.fr) | https://senacraft.fr/sanctions | personal |
+| [KFaction](http://kfaction.net) | http://kfaction.net/banlist | personal |
 | [BloodSymphony](https://bloodsymphony.com) | https://bloodsymphony.com/banlist | litebans |
 | [EnergyFight](https://energygaming.fr) | https://energygaming.fr/banlist/energyfight | litebans |
 | [EnergyCheat](https://energygaming.fr) | https://energygaming.fr/banlist/energycheat | litebans |
