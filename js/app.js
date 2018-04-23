@@ -9,7 +9,7 @@ licence: Creative Commons Attribution-NonCommercial-ShareAlike 3.0
 initiative by: VulkanNetwork [https://twitter.com/VulkanNetwork]
 ----------------------------------------------------------*/
 
-var HOST_API = "http://127.0.0.1:8080/";
+var HOST_API = "http://api.thelawyer.cf/";
 var hotlinks = [];
 var lastResult = [];
 
@@ -94,19 +94,29 @@ $(".refresh").click(function() {
 
 $(".show-details").click(function() {
     var type = $(this).attr("type");
+	var keyName = "";
+	
     $("#detailsContent").html("");
     $("#detailName").html(type);
-    $.each(hotlinks, function (i, item) {
-        if(type == "bans"){
-            $("#detailsContent").append("<strong>" + item.banCount + "</strong> bans provient du serveur <a href=" + item.website + ">" + item.name + "</a> <br>");
-        } else if(type == "mutes"){
-            $("#detailsContent").append("<strong>" + item.muteCount + "</strong> mutes provient du serveur <a href=" + item.website + ">" + item.name + "</a> <br>");
-        } else if(type == "kicks"){
-            $("#detailsContent").append("<strong>" + item.kickCount + "</strong> kicks provient du serveur <a href=" + item.website + ">" + item.name + "</a> <br>");
-        } else if(type == "warnings"){
-            $("#detailsContent").append("<strong>" + item.warningCount + "</strong> warnings provient du serveur <a href=" + item.website + ">" + item.name + "</a> <br>");
-        }
+	
+	if(type == "bans") {
+		keyName = "banCount";
+	} else if(type == "mutes") { 
+		keyName = "muteCount";
+	} else if(type == "kicks") { 
+		keyName = "kickCount";
+	} else if(type == "warnings") { 
+		keyName = "warningCount";
+	}
+	
+	var tmp = hotlinks.sort(function (a, b) {
+		return a[keyName] < b[keyName];
+	});
+	
+    $.each(tmp, function (i, item) {
+        $("#detailsContent").append("<strong>" + item[keyName] + "</strong> " + type + " provient du serveur <a href=" + item.website + ">" + item.name + "</a> <br>");
     });
+	
     $("#details").show();
 });
 
